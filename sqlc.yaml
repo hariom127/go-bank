@@ -1,0 +1,31 @@
+# sqlc configuration file format version
+version: "2"
+
+sql:
+  # Configuration for a single database
+  - engine: "postgresql" # Database engine to use
+
+    # Directory containing database migration/schema SQL files
+    schema: "db/migration/"
+
+    # Directory containing SQL queries that sqlc will convert into Go code
+    queries: "db/queries/"
+
+    gen:
+      go:
+        # Package name used in the generated Go files
+        package: "db"
+
+        # Directory where sqlc will generate Go files
+        out: "/db/sqlc"
+
+        # Use pgx/v5 as the Go database driver and SQL interface
+        sql_package: "pgx/v5"
+
+        # Add JSON tags to generated Go struct fields
+        # Example: AccountID int64 `json:"account_id"`
+        emit_json_tags: true
+
+        # Generate empty slices instead of nil slices for query results
+        # Example: []Account{} instead of nil when there are no results
+        emit_empty_slices: true
